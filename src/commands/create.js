@@ -3,7 +3,6 @@ const path = require('path');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const ora = require('ora');
-const Handlebars = require('handlebars');
 const { githubDownload } = require('./utils');
 const { exec } = require('child_process');
 const { log } = require('console');
@@ -49,7 +48,7 @@ async function createProject(projectName) {
   const spinner = ora(`download project ${answers.TemplateType || 'JavaScript'} template...`).start();
   // await fs.copy(templatePath, targetDir);
   const downloadRes = await githubDownload({
-    templateUrl: "1github:CNLHB/vue2-vite-demo",// "https://github.com/CNLHB/vue2-vite-demo.git", // 指定要下载的 Git 仓库，这里是 GitHub 上的 `username/repository`
+    templateUrl: "github:CNLHB/vue2-vite-demo",// "https://github.com/CNLHB/vue2-vite-demo.git", // 指定要下载的 Git 仓库，这里是 GitHub 上的 `username/repository`
     projectName: targetDir, // 指定下载的目标目录，这里将下载到当前目录下的 `my-repo` 目录
     // 回调函数，当下载完成时会被调用，如果发生错误，`err` 不为 `null`，否则 `err` 为 `null`，表示下载成功
   }
@@ -68,13 +67,7 @@ async function createProject(projectName) {
   // for (const file of files) {
   //   const filePath = path.join(targetDir, file);
   //   const content = await fs.readFile(filePath, 'utf8');
-  //   const compiled = Handlebars.compile(content);
-  //   const newContent = compiled({
-  //     projectName,
-  //     description: answers.description,
-  //     moduleType: answers.moduleType
-  //   });
-  //   await fs.writeFile(filePath, newContent);
+  //   await fs.writeFile(filePath, content);
   // }
 
   // 初始化项目

@@ -2,9 +2,10 @@
 
 const { program } = require('commander');
 const { createProject } = require('../src/commands/create');
+const pkg = require('../package.json')
 
 program
-  .version('1.0.0')
+  .version(pkg.version)
   .description('A CLI tool for creating JavaScript libraries');
 
 program
@@ -13,6 +14,7 @@ program
   .action(async (projectName) => {
     try {
       await createProject(projectName);
+      process.exit(0);
     } catch (error) {
       console.error(`Error creating project: ${error.message}`);
     }
